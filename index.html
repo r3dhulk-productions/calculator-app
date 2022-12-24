@@ -1,171 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator App</title>
-    <meta
-      name="description"
-      content="This calculator is even better than
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator App</title>
+  <meta name="description" content="This calculator is even better than
     windows one! Calculates 2 + 2 and more, division, multiplication, power and
-    root. And it also has dark mode!"
-    />
-    <meta name="theme-color" content="#031323" />
-    <meta name="MobileOptimized" content="width" />
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
+    root. And it also has dark mode!" />
+  <meta name="theme-color" content="#031323" />
+  <meta name="MobileOptimized" content="width" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://leonardomeza87.github.io/calculator/"
-    />
-    <meta property="og:title" content="Calculator" />
-    <meta
-      property="og:description"
-      content="This calculator is even better than windows one! Calculates 2 + 2 and more, division, multiplication, power and root. And it also has dark mode!"
-    />
-    <meta property="og:site_name" content="XNOR" />
-    <meta
-      property="og:image"
-      content="https://leonardomeza87.github.io/calculator/assets/preview.png"
-    />
-    <meta property="og:image:alt" content="Preview" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="628" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://r3dhulk.github.io/calculator-app/" />
+  <meta property="og:title" content="Calculator" />
+  <meta property="og:description"
+    content="This calculator is even better than windows one! Calculates 2 + 2 and more, division, multiplication, power and root. And it also has dark mode!" />
+  <meta property="og:image:alt" content="Preview" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="628" />
 
-    <meta name="google" content="notranslate" />
+  <meta name="google" content="notranslate" />
 
-    <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="manifest.json" />
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="shortcut icon" href="assets/favicon.png" />
-    <link rel="apple-touch-icon" href="assets/favicon.png" />
-    <link rel="apple-touch-startup-image" href="assets/favicon.png" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <script>
-      const w = window,
-        d = document,
-        de = d.documentElement;
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="shortcut icon" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="apple-touch-startup-image" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet" />
+</head>
 
-      let vh = w.innerHeight * 0.01;
-      de.style.setProperty("--vh", `${vh}px`);
+<body>
+  <script>
+    const w = window,
+      d = document,
+      de = d.documentElement;
 
-      //Color theme management
-      const light = "theme--light";
-      const dark = "theme--dark";
+    let vh = w.innerHeight * 0.01;
+    de.style.setProperty("--vh", `${vh}px`);
 
-      const t = localStorage.getItem("theme");
-      console.log(t);
+    //Color theme management
+    const light = "theme--light";
+    const dark = "theme--dark";
 
-      if (t === null || (t !== light && t !== dark)) {
-        const mediaQueryList = w.matchMedia("(prefers-color-scheme: dark)");
+    const t = localStorage.getItem("theme");
+    console.log(t);
 
-        if (mediaQueryList.matches) {
-          de.classList.add(dark);
-          localStorage.setItem("theme", dark);
-        } else {
-          de.classList.add(light);
-          localStorage.setItem("theme", light);
-        }
+    if (t === null || (t !== light && t !== dark)) {
+      const mediaQueryList = w.matchMedia("(prefers-color-scheme: dark)");
+
+      if (mediaQueryList.matches) {
+        de.classList.add(dark);
+        localStorage.setItem("theme", dark);
       } else {
-        de.classList.add(t);
+        de.classList.add(light);
+        localStorage.setItem("theme", light);
       }
-    </script>
-    <div class="calculator">
-      <div class="record-container" title="Record">
-        <textarea
-          readonly
-          id="record"
-          placeholder="0"
-          cols="30"
-          rows="3"
-        ></textarea>
-      </div>
-      <div class="display-container">
-        <textarea
-          readonly
-          id="display"
-          placeholder="0"
-          cols="30"
-          rows="4"
-        ></textarea>
-      </div>
-      <button type="button" title="Information" class="infoBtn secondary">
-        Info
-      </button>
-      <button type="button" title="Clear" id="clear" class="secondary">
-        C
-      </button>
-      <button
-        type="button"
-        title="Clear ALL"
-        id="clearAll"
-        class="opaque primary"
-      >
-        CA
-      </button>
-      <button type="button" title="Seven" id="seven">7</button>
-      <button type="button" title="Eight" id="eight">8</button>
-      <button type="button" title="Nine" id="nine">9</button>
-      <button type="button" title="Multiply" id="multiply" class="primary">
-        x
-      </button>
-      <button type="button" title="Divide" id="divide" class="primary">
-        /
-      </button>
-      <button type="button" title="Four" id="four">4</button>
-      <button type="button" title="Five" id="five">5</button>
-      <button type="button" title="Six" id="six">6</button>
-      <button type="button" title="Subtract" id="subtract" class="primary">
-        -
-      </button>
-      <button type="button" title="Power" id="power" class="primary">^</button>
-      <button type="button" title="One" id="one">1</button>
-      <button type="button" title="Two" id="two">2</button>
-      <button type="button" title="Three" id="three">3</button>
-      <button type="button" title="Add" id="add" class="primary">+</button>
-      <button type="button" title="Equals" id="equals" class="opaque primary">
-        =
-      </button>
-      <button type="button" title="Zero" id="zero">0</button>
-      <button type="button" title="Decimal" id="decimal">.</button>
-      <button type="button" title="Root" id="root" class="primary">√</button>
+    } else {
+      de.classList.add(t);
+    }
+  </script>
+  <div class="calculator">
+    <div class="record-container" title="Record">
+      <textarea readonly id="record" placeholder="0" cols="30" rows="3"></textarea>
     </div>
+    <div class="display-container">
+      <textarea readonly id="display" placeholder="0" cols="30" rows="4"></textarea>
+    </div>
+    <button type="button" title="Information" class="infoBtn secondary">
+      Info
+    </button>
+    <button type="button" title="Clear" id="clear" class="secondary">
+      C
+    </button>
+    <button type="button" title="Clear ALL" id="clearAll" class="opaque primary">
+      CA
+    </button>
+    <button type="button" title="Seven" id="seven">7</button>
+    <button type="button" title="Eight" id="eight">8</button>
+    <button type="button" title="Nine" id="nine">9</button>
+    <button type="button" title="Multiply" id="multiply" class="primary">
+      x
+    </button>
+    <button type="button" title="Divide" id="divide" class="primary">
+      /
+    </button>
+    <button type="button" title="Four" id="four">4</button>
+    <button type="button" title="Five" id="five">5</button>
+    <button type="button" title="Six" id="six">6</button>
+    <button type="button" title="Subtract" id="subtract" class="primary">
+      -
+    </button>
+    <button type="button" title="Power" id="power" class="primary">^</button>
+    <button type="button" title="One" id="one">1</button>
+    <button type="button" title="Two" id="two">2</button>
+    <button type="button" title="Three" id="three">3</button>
+    <button type="button" title="Add" id="add" class="primary">+</button>
+    <button type="button" title="Equals" id="equals" class="opaque primary">
+      =
+    </button>
+    <button type="button" title="Zero" id="zero">0</button>
+    <button type="button" title="Decimal" id="decimal">.</button>
+    <button type="button" title="Root" id="root" class="primary">√</button>
+  </div>
 
-    <!-- Info -->
-    <div id="info" class="hidden">
-      <p>Hello user, this is my calculator.</p>
-      <p>
-        You can do operations with the operators: plus, minus, multiplication,
-        division and power simultaneously.
-      </p>
-      <p>
-        You can only enter the root function if you enter it first, and it is
-        not compatible with the other operations.
-      </p>
-      <p>
-        Code From R3DHULK  (<a
-          href="https://github.com/r3dhulk"
-          target="_blank"
-          >GitHub</a
-        >,
-        <a href="https://www.youtube.com/@r3dhulk-" target="_blank">Youtube</a
-        >)
-      </p>
-      <button type="button" id="themeBtn">Switch to Light Theme</button>
-      <button type="button" class="infoBtn">Close</button>
-    </div>
-    <script src="js/app.js" type="module"></script>
-  </body>
+  <!-- Info -->
+  <div id="info" class="hidden">
+    <p>Hello user, this is my calculator.</p>
+    <p>
+      You can do operations with the operators: plus, minus, multiplication,
+      division and power simultaneously.
+    </p>
+    <p>
+      You can only enter the root function if you enter it first, and it is
+      not compatible with the other operations.
+    </p>
+    <p>
+      Code From R3DHULK (<a href="https://github.com/r3dhulk" target="_blank">GitHub</a>,
+      <a href="https://www.youtube.com/@r3dhulk-" target="_blank">Youtube</a>)
+    </p>
+    <button type="button" id="themeBtn">Switch to Light Theme</button>
+    <button type="button" class="infoBtn">Close</button>
+  </div>
+  <script src="js/app.js" type="module"></script>
+</body>
+
 </html>
